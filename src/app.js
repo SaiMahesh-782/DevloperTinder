@@ -1,23 +1,19 @@
 
 
-const express = require('express');
+import express, { json } from 'express';
 const app = express();
-const {connectDB}=require('./config/database');
-const UserModel=require('./Models/User');
-app.use(express.json());
+import { connectDB } from './config/database';
+import { find } from './Models/User';
+app.use(json());
 
 // const {Uservalidation}=require('./utils/validation');
-const bcrypt=require('bcrypt');
-const cookieParser=require('cookie-parser');
+import bcrypt from 'bcrypt';
+import cookieParser from 'cookie-parser';
 // const jwt=require('jsonwebtoken')
 // const {UserAuth}=require('./middleware/auth');
-const {authRouter}=require('./Router/authRouter');
-const {ProfileRouter}=require('./Router/ProfileRouter');
-const {RequestRouter}=require('./Router/RequestRouter');
-
-app.use("/",authRouter);
-app.use("/ ",ProfileRouter);
-app.use("/ ",RequestRouter);
+import { authRouter } from './Router/authRouter';
+import { ProfileRouter } from './Router/ProfileRouter';
+import { RequestRouter } from './Router/RequestRouter';
 
 
 app.use(cookieParser());
@@ -27,7 +23,7 @@ app.get("/user", async (req, res) =>{
 const userEmail = req.body.emailId;
 
 try {
-const user =await UserModel.find({ emailId : userEmail});
+const user =await find({ emailId : userEmail});
 res.send(user);
 
  
