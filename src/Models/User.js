@@ -1,4 +1,4 @@
-00:16:00
+
 const mongoose=require('mongoose');
 const validator=require('validator');
 const jwt=require('jsonwebtoken')
@@ -14,7 +14,7 @@ const UserSchema=new mongoose.Schema({
 },
  lastName :
      {
-        type:String
+        type:String 
 },
  emailId :
     {type:String,

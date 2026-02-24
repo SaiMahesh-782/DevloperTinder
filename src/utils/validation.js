@@ -13,5 +13,14 @@ const Uservalidation=(req)=>{
         throw new Error("password is not strong enough");
     }
     }
-module.exports={Uservalidation 
+
+const ValidateEditProfile=(req)=>{
+const allowedFields=["firstName","lastName","password","skills","gender","about","photo"]; 
+const updates=Object.keys(req.body).every((field)=>{
+    allowedFields.includes(field);
+});
+return updates;
+
+}
+module.exports={Uservalidation,ValidateEditProfile
 }

@@ -1,8 +1,9 @@
-// 1:09:14
-
 const express= require('express');
-
 const authRouter=express.Router();
+const {Uservalidation}=require('../utils/validation');
+const bcrypt=require('bcrypt');
+const jwt=require('jsonwebtoken');
+const UserModel=require('../Models/User');
 
 authRouter.post('/SignUp',async (req,res)=>{
  try{ 
@@ -45,3 +46,12 @@ authRouter.post('/login',async (req,res)=>{
     }catch(err){
         res.status(500).send("Error logging in user "+err.message);
     }})
+
+authRouter.post('/logout',(req,res)=>{
+    res.cookie("token",null,{
+        expires:new Date(Date.now()),
+    });
+    res.send("User logged out successfully");
+})
+
+module.exports={authRouter};
